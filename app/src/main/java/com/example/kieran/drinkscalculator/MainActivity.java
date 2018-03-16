@@ -11,15 +11,12 @@ import java.math.BigDecimal;
 
 public class MainActivity extends Activity {
 
+    DrinkingSession session = new DrinkingSession(65, true);
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        String testString = "Nausea\nVomiting\nSevere motor impairment\nLoss of consciousness\nMemory blackout";
-        TextView test = (TextView) findViewById(R.id.posible_effects_display);
-        test.setText(testString);
-
     }
 
     public void onSettingsClick(View view){
@@ -46,10 +43,7 @@ public class MainActivity extends Activity {
     public void onAddDrinkClick(View view){
         EditText plusButton = (EditText) findViewById(R.id.drinkUnits);
         String editTextString = plusButton.getText().toString();
-        int newDrink = Integer.parseInt(editTextString);
-
-
-
+        session.addDrink(editTextString);
 
     }
 

@@ -5,8 +5,9 @@ import java.math.BigDecimal;
 public class DrinkingSession {
     public int weight;
     public boolean isMale;
-    public BigDecimal bac;
-    public int numDrinks;
+    public BigDecimal bac = new BigDecimal("0.0");
+    public BigDecimal totalStandardDrinks = new BigDecimal("0.0");
+    public int numDrinks = 0;
 
     // number of drinks
     // standard drinks consumed
@@ -36,10 +37,13 @@ public class DrinkingSession {
 
     public void calculateBac(){
 
+
     }
 
-    public void addDrink(){
-
+    public void addDrink(String standardDrink){
+        numDrinks++;
+        totalStandardDrinks = totalStandardDrinks.add(new BigDecimal(standardDrink));
+        calculateBac();
     }
 
 }
