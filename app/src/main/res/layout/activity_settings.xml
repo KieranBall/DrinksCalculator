@@ -7,7 +7,7 @@
     tools:context="com.example.kieran.drinkscalculator.Settings">
 
     <TextView
-        android:id="@+id/textView9"
+        android:id="@+id/weight_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -17,41 +17,41 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/weight_input"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:layout_marginStart="16dp"
         android:ems="10"
         android:inputType="number"
-        app:layout_constraintBaseline_toBaselineOf="@+id/textView9"
+        app:layout_constraintBaseline_toBaselineOf="@+id/weight_label"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textView9"
+        app:layout_constraintStart_toEndOf="@+id/weight_label"
         tools:ignore="LabelFor" />
 
     <TextView
-        android:id="@+id/textView10"
+        android:id="@+id/gender_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="64dp"
         android:text="@string/gender"
-        app:layout_constraintEnd_toEndOf="@+id/textView9"
-        app:layout_constraintTop_toBottomOf="@+id/textView9" />
+        app:layout_constraintEnd_toEndOf="@+id/weight_label"
+        app:layout_constraintTop_toBottomOf="@+id/weight_label" />
 
     <Spinner
-        android:id="@+id/spinner"
+        android:id="@+id/gender_select"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:layout_marginStart="16dp"
         android:entries="@array/gender"
         android:spinnerMode="dialog"
-        app:layout_constraintBaseline_toBaselineOf="@+id/textView10"
+        app:layout_constraintBaseline_toBaselineOf="@+id/gender_label"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textView10" />
+        app:layout_constraintStart_toEndOf="@+id/gender_label" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/reset_button"
         style="@android:style/Widget.Holo.Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -61,10 +61,10 @@
         android:text="@string/reset_session"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinner" />
+        app:layout_constraintTop_toBottomOf="@+id/gender_select" />
 
     <Button
-        android:id="@+id/button5"
+        android:id="@+id/save_button"
         style="@android:style/Widget.Holo.Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

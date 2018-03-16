@@ -1,11 +1,9 @@
 package com.example.kieran.drinkscalculator;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -19,8 +17,7 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
 
         String testString = "Nausea\nVomiting\nSevere motor impairment\nLoss of consciousness\nMemory blackout";
-        TextView test = (TextView) findViewById(R.id.testText);
-
+        TextView test = (TextView) findViewById(R.id.posible_effects_display);
         test.setText(testString);
 
     }
@@ -31,7 +28,7 @@ public class MainActivity extends Activity {
     }
 
     public void  onPlusClick(View view){
-        EditText plusButton = (EditText) findViewById(R.id.numDrinks);
+        EditText plusButton = (EditText) findViewById(R.id.drinkUnits);
         String editTextString = plusButton.getText().toString();
         BigDecimal drinksNumber = new BigDecimal(editTextString);
         BigDecimal newDrinksNumber = drinksNumber.add(new BigDecimal("0.1"));
@@ -39,11 +36,21 @@ public class MainActivity extends Activity {
     }
 
     public void  onMinusClick(View view){
-        EditText plusButton = (EditText) findViewById(R.id.numDrinks);
+        EditText plusButton = (EditText) findViewById(R.id.drinkUnits);
         String editTextString = plusButton.getText().toString();
         BigDecimal drinksNumber = new BigDecimal(editTextString);
         BigDecimal newDrinksNumber = drinksNumber.subtract(new BigDecimal("0.1"));
         plusButton.setText(newDrinksNumber.toString());
+    }
+
+    public void onAddDrinkClick(View view){
+        EditText plusButton = (EditText) findViewById(R.id.drinkUnits);
+        String editTextString = plusButton.getText().toString();
+        int newDrink = Integer.parseInt(editTextString);
+
+
+
+
     }
 
 
