@@ -51,9 +51,6 @@ public class DrinkingSession {
         BigDecimal alcoholDivideWeight = alcoholConsumedGrams.divide(weightTimesR,10,BigDecimal.ROUND_UP);
         BigDecimal finalBac = alcoholDivideWeight.multiply(new BigDecimal("100"));
         BigDecimal rounded = finalBac.round(new MathContext(3, RoundingMode.UP));
-
-        System.out.println(rounded);
-
         bac = rounded.toString();
     }
 

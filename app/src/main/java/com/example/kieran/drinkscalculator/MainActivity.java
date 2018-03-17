@@ -11,12 +11,23 @@ import java.math.BigDecimal;
 
 public class MainActivity extends Activity {
 
+    String under029 = "Average individual appears normal";
+    String under059 = "Concentration\nMild euphoria\nTalkativeness\nDecreased inhibition";
+    String under099 = "Reasoning\nDepth perception\nPeripheral vision\nBlunted feelings\nEuphoria\nDisinhibition\nExtraversion";
+    String under199 = "Reflex impairment\nReaction time\nGross motor control\nStaggering\nSlurred speech\nossibility of nausea and vomiting";
+    String under299 = "Severe motor impairment\nLoss of consciousness\nMemory blackout\nNausea\nVomiting\nEmotional swings\nPartial loss of understanding";
+    String under399 = "Bladder function\nBreathing\nDysequilibrium\nStupor\nCentral nervous system depression\nLapses in and out of consciousness";
+    String under500 = "Breathing\nHeart rate\nComa\nPositional alcohol nystagmus\nPossibility of death";
+    String over500 = "Death";
+
     DrinkingSession session = new DrinkingSession(65000, true);
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        setEffectsText();
     }
 
     public void onSettingsClick(View view){
@@ -47,6 +58,24 @@ public class MainActivity extends Activity {
         session.calculateBac();
         TextView bacDisplay = (TextView) findViewById(R.id.bac_display);
         bacDisplay.setText(session.bac);
+        setEffectsText();
+    }
+
+    public void setEffectsText(){
+        TextView effectsText = (TextView)findViewById(R.id.posible_effects_display);
+        Double bac = Double.parseDouble(session.bac);
+
+        if (bac == 0)effectsText.setText("-");
+        else if (bac >= 0.001 && bac <= 0.029)effectsText.setText(under029);
+        else if (bac >= 0.030 && bac <= 0.059)effectsText.setText(under059);
+        else if (bac >= 0.060 && bac <= 0.099)effectsText.setText(under099);
+        else if (bac >= 0.100 && bac <= 0.199)effectsText.setText(under199);
+        else if (bac >= 0.200 && bac <= 0.299)effectsText.setText(under299);
+        else if (bac >= 0.300 && bac <= 0.399)effectsText.setText(under399);
+        else if (bac >= 0.400 && bac <= 0.500)effectsText.setText(under500);
+        else if (bac > 0.500)effectsText.setText(over500);
+
+
     }
 
 
