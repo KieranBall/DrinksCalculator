@@ -39,7 +39,6 @@ public class DrinkingSession {
 
         if (numDrinks == 1){
             timeFirstDrink = Calendar.getInstance();
-            //System.out.println(currentTime.get(Calendar.HOUR_OF_DAY));
         }
     }
 
@@ -73,5 +72,34 @@ public class DrinkingSession {
         BigDecimal rounded = finalBac.round(new MathContext(3, RoundingMode.HALF_UP));
         bac = rounded.toString();
     }
+
+    public int calcTimeTill(String percentage){
+
+        BigDecimal controlBac = new BigDecimal(bac);
+        int hours = 0;
+
+        Boolean finished = false;
+        while (!finished){
+
+
+
+
+            controlBac = controlBac.subtract(new BigDecimal("0.015"));
+
+
+            int result = controlBac.compareTo(new BigDecimal(percentage));
+            if (result == 0 || result == -1){
+                finished = true;
+                break;
+
+            }
+            hours++;
+        }
+
+        return hours;
+
+    }
+
+
 
 }

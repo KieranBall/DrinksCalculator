@@ -8,6 +8,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import java.math.BigDecimal;
+import java.util.Calendar;
 
 public class MainActivity extends Activity {
 
@@ -60,12 +61,13 @@ public class MainActivity extends Activity {
         String formatedBacDisplay = session.bac.substring(0, 5);
         bacDisplay.setText(formatedBacDisplay);
         setEffectsText();
+        setTimesText();
+
     }
 
     public void setEffectsText(){
         TextView effectsText = (TextView)findViewById(R.id.posible_effects_display);
         Double bac = Double.parseDouble(session.bac);
-
         if (bac == 0)effectsText.setText("-");
         else if (bac >= 0.001 && bac <= 0.029)effectsText.setText(under029);
         else if (bac >= 0.030 && bac <= 0.059)effectsText.setText(under059);
@@ -75,9 +77,19 @@ public class MainActivity extends Activity {
         else if (bac >= 0.300 && bac <= 0.399)effectsText.setText(under399);
         else if (bac >= 0.400 && bac <= 0.500)effectsText.setText(under500);
         else if (bac > 0.500)effectsText.setText(over500);
-
-
     }
+
+    public void setTimesText(){
+
+        int soberTime = session.calcTimeTill("0.0");
+        TextView soberTimeDisplay = (TextView) findViewById(R.id.time_until_sober_display);
+        soberTimeDisplay.setText(String.format("%dhrs", soberTime));
+
+        int driveTime = session.calcTimeTill("0.05");
+        TextView drinkTimeDisplay = (TextView) findViewById(R.id.time_until_drive_display);
+        drinkTimeDisplay.setText(String.format("%dhrs", driveTime));
+    }
+
 
 
 }
