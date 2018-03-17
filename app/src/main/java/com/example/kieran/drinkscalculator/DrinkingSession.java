@@ -7,6 +7,8 @@ import java.math.MathContext;
 import java.math.RoundingMode;
 import java.util.Calendar;
 
+import javax.xml.datatype.Duration;
+
 public class DrinkingSession {
     public int weight = 65000;
     public boolean isMale = false;
@@ -14,6 +16,7 @@ public class DrinkingSession {
     public BigDecimal totalStandardDrinks = new BigDecimal("0.0");
     public int numDrinks = 0;
     public BigDecimal alcoholConsumedGrams;
+    public Calendar timeFirstDrink;
 
 
     public DrinkingSession(int userWeight, boolean isUserMale){
@@ -35,17 +38,8 @@ public class DrinkingSession {
         totalStandardDrinks = totalStandardDrinks.add(new BigDecimal(standardDrink));
 
         if (numDrinks == 1){
-
-            Calendar currentTime = Calendar.getInstance();
-            Calendar newTime = Calendar.getInstance();
-            newTime.add(Calendar.HOUR_OF_DAY, 1);
-
-            System.out.println(currentTime.get(Calendar.HOUR_OF_DAY));
-            System.out.println(newTime.get(Calendar.HOUR_OF_DAY));
-
-
-
-
+            timeFirstDrink = Calendar.getInstance();
+            //System.out.println(currentTime.get(Calendar.HOUR_OF_DAY));
         }
     }
 
@@ -64,8 +58,35 @@ public class DrinkingSession {
 
         alcoholConsumedGrams = totalStandardDrinks.multiply(new BigDecimal("10"));
         BigDecimal alcoholDivideWeight = alcoholConsumedGrams.divide(weightTimesR,10,BigDecimal.ROUND_UP);
-        BigDecimal finalBac = alcoholDivideWeight.multiply(new BigDecimal("100"));
-        BigDecimal rounded = finalBac.round(new MathContext(3, RoundingMode.UP));
+        BigDecimal grossBac = alcoholDivideWeight.multiply(new BigDecimal("100"));
+
+        //elapsed time
+        // turn first drink time into a negative of next days time
+
+        Calendar currentTime = Calendar.getInstance();
+
+
+
+
+        long timeDifference = currentTime.getTimeInMillis() - timeFirstDrink.getTimeInMillis();
+        long minute = (timeDifference / (1000 * 60)) % 60;
+        long hour = (timeDifference / (1000 * 60 * 60)) % 24;
+
+        System.out.println(minute);
+        System.out.println(hour);
+
+
+
+
+
+
+
+
+
+        String elapsedTime = "0.015";
+        BigDecimal finalBac = grossBac.subtract(new BigDecimal(elapsedTime));
+
+        BigDecimal rounded = finalBac.round(new MathContext(3, RoundingMode.HALF_UP));
         bac = rounded.toString();
     }
 

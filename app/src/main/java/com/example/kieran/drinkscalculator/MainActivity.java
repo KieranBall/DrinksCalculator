@@ -14,7 +14,7 @@ public class MainActivity extends Activity {
     String under029 = "Average individual appears normal";
     String under059 = "Concentration\nMild euphoria\nTalkativeness\nDecreased inhibition";
     String under099 = "Reasoning\nDepth perception\nPeripheral vision\nBlunted feelings\nEuphoria\nDisinhibition\nExtraversion";
-    String under199 = "Reflex impairment\nReaction time\nGross motor control\nStaggering\nSlurred speech\nossibility of nausea and vomiting";
+    String under199 = "Reflex impairment\nReaction time\nGross motor control\nStaggering\nSlurred speech\nPossibility of nausea and vomiting";
     String under299 = "Severe motor impairment\nLoss of consciousness\nMemory blackout\nNausea\nVomiting\nEmotional swings\nPartial loss of understanding";
     String under399 = "Bladder function\nBreathing\nDysequilibrium\nStupor\nCentral nervous system depression\nLapses in and out of consciousness";
     String under500 = "Breathing\nHeart rate\nComa\nPositional alcohol nystagmus\nPossibility of death";
@@ -57,7 +57,8 @@ public class MainActivity extends Activity {
         session.addDrink(editTextString);
         session.calculateBac();
         TextView bacDisplay = (TextView) findViewById(R.id.bac_display);
-        bacDisplay.setText(session.bac);
+        String formatedBacDisplay = session.bac.substring(0, 5);
+        bacDisplay.setText(formatedBacDisplay);
         setEffectsText();
     }
 
