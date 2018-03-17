@@ -73,7 +73,7 @@ public class DrinkingSession {
         bac = rounded.toString();
     }
 
-    public int calcTimeTill(String percentage){
+    public String calcTimeTill(String percentage){
 
         BigDecimal controlBac = new BigDecimal(bac);
         int hours = 0;
@@ -96,7 +96,14 @@ public class DrinkingSession {
             hours++;
         }
 
-        return hours;
+        Calendar currentTime = Calendar.getInstance();
+        currentTime.add(Calendar.HOUR_OF_DAY, hours);
+
+
+
+
+
+        return String.format("%d:%d", currentTime.get(Calendar.HOUR_OF_DAY), currentTime.get(Calendar.MINUTE));
 
     }
 

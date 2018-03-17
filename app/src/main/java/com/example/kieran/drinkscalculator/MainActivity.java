@@ -81,13 +81,14 @@ public class MainActivity extends Activity {
 
     public void setTimesText(){
 
-        int soberTime = session.calcTimeTill("0.0");
+        String soberTime = session.calcTimeTill("0.0");
         TextView soberTimeDisplay = (TextView) findViewById(R.id.time_until_sober_display);
-        soberTimeDisplay.setText(String.format("%dhrs", soberTime));
+        soberTimeDisplay.setText(soberTime);
 
-        int driveTime = session.calcTimeTill("0.05");
-        TextView drinkTimeDisplay = (TextView) findViewById(R.id.time_until_drive_display);
-        drinkTimeDisplay.setText(String.format("%dhrs", driveTime));
+        String driveTime = session.calcTimeTill("0.05");
+        TextView driveTimeDisplay = (TextView) findViewById(R.id.time_until_drive_display);
+        driveTimeDisplay.setText(driveTime);
+
     }
 
 
