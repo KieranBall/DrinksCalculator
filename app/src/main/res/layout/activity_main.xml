@@ -10,7 +10,7 @@
         android:id="@+id/bac_display"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
+        android:layout_marginEnd="8dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:text="@string/default_bac"
@@ -171,7 +171,7 @@
         android:layout_marginEnd="16dp"
         android:layout_marginStart="16dp"
         android:ems="10"
-        android:inputType="number"
+        android:inputType="textImeMultiLine|numberDecimal"
         android:singleLine="true"
         android:text="@string/default_drink"
         android:textAlignment="textEnd"
@@ -179,5 +179,17 @@
         app:layout_constraintEnd_toStartOf="@+id/plus_button"
         app:layout_constraintStart_toStartOf="parent"
         tools:ignore="LabelFor" />
+
+    <Button
+        android:id="@+id/refresh_button"
+        style="@android:style/Widget.Holo.Button.Small"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="8dp"
+        android:onClick="onRefreshClick"
+        android:text="R"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

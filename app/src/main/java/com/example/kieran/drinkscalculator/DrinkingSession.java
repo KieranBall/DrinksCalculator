@@ -81,11 +81,7 @@ public class DrinkingSession {
         Boolean finished = false;
         while (!finished){
 
-
-
-
             controlBac = controlBac.subtract(new BigDecimal("0.015"));
-
 
             int result = controlBac.compareTo(new BigDecimal(percentage));
             if (result == 0 || result == -1){
@@ -96,14 +92,36 @@ public class DrinkingSession {
             hours++;
         }
 
-        Calendar currentTime = Calendar.getInstance();
-        currentTime.add(Calendar.HOUR_OF_DAY, hours);
+        if (hours == 0){
+            return "-";
+        }
+        else {
+
+            Calendar currentTime = Calendar.getInstance();
+            currentTime.add(Calendar.HOUR_OF_DAY, hours);
+
+            int hour24 = currentTime.get(Calendar.HOUR_OF_DAY);
+            int hour12 = 0;
+            String amPm = "am";
+
+            if (hour24 == 0) {
+                hour12 = 12;
+                amPm = "am";
+            } else if (hour24 < 12) {
+                hour12 = hour24;
+                amPm = "am";
+            } else if (hour24 == 12) {
+                hour12 = 12;
+                amPm = "pm";
+            } else if (hour24 > 12) {
+                hour12 = hour24 - 12;
+                amPm = "pm";
+            }
+            return String.format("%d:%d%s", hour12, currentTime.get(Calendar.MINUTE), amPm);
+        }
 
 
 
-
-
-        return String.format("%d:%d", currentTime.get(Calendar.HOUR_OF_DAY), currentTime.get(Calendar.MINUTE));
 
     }
 
