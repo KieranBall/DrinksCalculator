@@ -11,7 +11,7 @@ import java.math.BigDecimal;
 
 public class MainActivity extends Activity {
 
-    DrinkingSession session = new DrinkingSession(65, true);
+    DrinkingSession session = new DrinkingSession(65000, true);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +44,9 @@ public class MainActivity extends Activity {
         EditText plusButton = (EditText) findViewById(R.id.drinkUnits);
         String editTextString = plusButton.getText().toString();
         session.addDrink(editTextString);
-
+        session.calculateBac();
+        TextView bacDisplay = (TextView) findViewById(R.id.bac_display);
+        bacDisplay.setText(session.bac);
     }
 
 
