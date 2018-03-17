@@ -117,7 +117,14 @@ public class DrinkingSession {
                 hour12 = hour24 - 12;
                 amPm = "pm";
             }
-            return String.format("%d:%d%s", hour12, currentTime.get(Calendar.MINUTE), amPm);
+
+            int rawMinute = currentTime.get(Calendar.MINUTE);
+            String formattedMinute = "";
+            if (rawMinute < 10){
+                formattedMinute = String.format("0%d", rawMinute);
+            }
+
+            return String.format("%d:%s%s", hour12, formattedMinute, amPm);
         }
 
 
