@@ -5,6 +5,7 @@ import android.widget.TextView;
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.math.RoundingMode;
+import java.util.Calendar;
 
 public class DrinkingSession {
     public int weight = 65000;
@@ -32,6 +33,20 @@ public class DrinkingSession {
     public void addDrink(String standardDrink){
         numDrinks++;
         totalStandardDrinks = totalStandardDrinks.add(new BigDecimal(standardDrink));
+
+        if (numDrinks == 1){
+
+            Calendar currentTime = Calendar.getInstance();
+            Calendar newTime = Calendar.getInstance();
+            newTime.add(Calendar.HOUR_OF_DAY, 1);
+
+            System.out.println(currentTime.get(Calendar.HOUR_OF_DAY));
+            System.out.println(newTime.get(Calendar.HOUR_OF_DAY));
+
+
+
+
+        }
     }
 
     public void calculateBac(){
