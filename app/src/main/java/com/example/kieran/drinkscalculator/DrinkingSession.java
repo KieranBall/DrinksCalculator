@@ -60,31 +60,15 @@ public class DrinkingSession {
         BigDecimal alcoholDivideWeight = alcoholConsumedGrams.divide(weightTimesR,10,BigDecimal.ROUND_UP);
         BigDecimal grossBac = alcoholDivideWeight.multiply(new BigDecimal("100"));
 
-        //elapsed time
-        // turn first drink time into a negative of next days time
 
         Calendar currentTime = Calendar.getInstance();
 
-
-
-
         long timeDifference = currentTime.getTimeInMillis() - timeFirstDrink.getTimeInMillis();
-        long minute = (timeDifference / (1000 * 60)) % 60;
-        long hour = (timeDifference / (1000 * 60 * 60)) % 24;
+        long hoursDifference = (timeDifference / (1000 * 60 * 60)) % 24;
 
-        System.out.println(minute);
-        System.out.println(hour);
+        BigDecimal elapsedTimeCalc = new BigDecimal(hoursDifference).multiply(new BigDecimal("0.015"));
 
-
-
-
-
-
-
-
-
-        String elapsedTime = "0.015";
-        BigDecimal finalBac = grossBac.subtract(new BigDecimal(elapsedTime));
+        BigDecimal finalBac = grossBac.subtract(elapsedTimeCalc);
 
         BigDecimal rounded = finalBac.round(new MathContext(3, RoundingMode.HALF_UP));
         bac = rounded.toString();
