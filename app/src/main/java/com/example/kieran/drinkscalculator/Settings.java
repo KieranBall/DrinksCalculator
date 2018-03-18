@@ -63,7 +63,10 @@ public class Settings extends Activity {
     }
 
     public void onResetSessionClick(View view){
-        session = new DrinkingSession(session.weight,session.isMale);
+        int saveWeight = session.weight;
+        boolean saveIsMale = session.isMale;
+
+        session = new DrinkingSession(saveWeight,saveIsMale);
     }
 
 
