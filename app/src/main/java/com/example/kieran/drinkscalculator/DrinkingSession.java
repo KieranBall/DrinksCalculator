@@ -77,6 +77,7 @@ public class DrinkingSession {
 
         BigDecimal controlBac = new BigDecimal(bac);
         int hours = 0;
+        Calendar currentTime = Calendar.getInstance();
 
         Boolean finished = false;
         while (!finished){
@@ -93,39 +94,45 @@ public class DrinkingSession {
         }
 
         if (hours == 0){
-            return "-";
-        }
-        else {
+            double bacDouble = Double.parseDouble(bac);
+            if (bacDouble >= 0.05){
 
-            Calendar currentTime = Calendar.getInstance();
-            currentTime.add(Calendar.HOUR_OF_DAY, hours+1);
-
-            int hour24 = currentTime.get(Calendar.HOUR_OF_DAY);
-            int hour12 = 0;
-            String amPm = "am";
-
-            if (hour24 == 0) {
-                hour12 = 12;
-                amPm = "am";
-            } else if (hour24 < 12) {
-                hour12 = hour24;
-                amPm = "am";
-            } else if (hour24 == 12) {
-                hour12 = 12;
-                amPm = "pm";
-            } else if (hour24 > 12) {
-                hour12 = hour24 - 12;
-                amPm = "pm";
+            }
+            else {
+                return "-";
             }
 
-            int rawMinute = currentTime.get(Calendar.MINUTE);
-            String formattedMinute = Integer.toString(rawMinute);
-            if (rawMinute < 10){
-                formattedMinute = String.format("0%d", rawMinute);
-            }
-
-            return String.format("%d:%s%s", hour12, formattedMinute, amPm);
         }
+
+
+        currentTime.add(Calendar.HOUR_OF_DAY, hours+1);
+
+        int hour24 = currentTime.get(Calendar.HOUR_OF_DAY);
+        int hour12 = 0;
+        String amPm = "am";
+
+        if (hour24 == 0) {
+            hour12 = 12;
+            amPm = "am";
+        } else if (hour24 < 12) {
+            hour12 = hour24;
+            amPm = "am";
+        } else if (hour24 == 12) {
+            hour12 = 12;
+            amPm = "pm";
+        } else if (hour24 > 12) {
+            hour12 = hour24 - 12;
+            amPm = "pm";
+        }
+
+        int rawMinute = currentTime.get(Calendar.MINUTE);
+        String formattedMinute = Integer.toString(rawMinute);
+        if (rawMinute < 10){
+            formattedMinute = String.format("0%d", rawMinute);
+        }
+
+        return String.format("%d:%s%s", hour12, formattedMinute, amPm);
+
 
 
 
