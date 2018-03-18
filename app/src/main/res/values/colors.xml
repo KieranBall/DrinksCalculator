@@ -3,7 +3,7 @@
     <color name="colorPrimary">#ff8500</color>
     <color name="colorPrimaryDark">#d97100</color>
     <color name="colorAccent">#FF4081</color>
-    <color name="primary_material_light">#d63e3e</color>
+    <color name="primary_material_light">#00d63e3e</color>
     <color name="newback">#151515</color>
     <color name="accent_material_dark">#0abbff</color>
 </resources>

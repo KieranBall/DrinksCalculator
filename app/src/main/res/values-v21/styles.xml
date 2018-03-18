@@ -6,7 +6,7 @@
     </style>
 
     <style name="custom_theme" parent="android:Theme.Material.NoActionBar" >
-        <item name="android:colorPrimary">@color/accent_material_dark</item>
+        <item name="android:colorPrimary">@color/newback</item>
         <item name="android:colorPrimaryDark">@color/accent_material_dark</item>
         <item name="android:colorBackground">@color/newback</item>
         <item name="android:colorAccent">@color/accent_material_dark</item>

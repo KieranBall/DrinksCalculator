@@ -101,7 +101,4 @@ public class MainActivity extends Activity {
         bacDisplay.setText(formatedBacDisplay);
 
     }
-
-
-
 }
