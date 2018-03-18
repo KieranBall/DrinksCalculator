@@ -180,16 +180,16 @@
         app:layout_constraintStart_toStartOf="parent"
         tools:ignore="LabelFor" />
 
-    <Button
-        android:id="@+id/refresh_button"
-        style="@android:style/Widget.Holo.Button.Small"
+    <ImageView
+        android:id="@+id/imageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginTop="8dp"
-        android:onClick="onRefreshClick"
-        android:text="R"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="16dp"
+        android:src="@drawable/update_arrow"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:onClick="onRefreshClick"
+        />
 
 </android.support.constraint.ConstraintLayout>
