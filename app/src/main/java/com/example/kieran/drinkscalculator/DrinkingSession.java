@@ -2,6 +2,7 @@ package com.example.kieran.drinkscalculator;
 
 import android.widget.TextView;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.math.RoundingMode;
@@ -9,7 +10,7 @@ import java.util.Calendar;
 
 import javax.xml.datatype.Duration;
 
-public class DrinkingSession {
+public class DrinkingSession implements Serializable {
     public int weight = 65000;
     public boolean isMale = false;
     public String bac = "0.0";

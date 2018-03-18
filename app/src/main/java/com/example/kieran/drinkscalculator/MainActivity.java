@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Calendar;
 
@@ -21,32 +22,13 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
 
 
-        Bundle unpackBundle = getIntent().getExtras();
-
-
-        try {
-            weight = unpackBundle.getInt("weight", weight);
-            isMale = unpackBundle.getBoolean("isMale", isMale);
-            System.out.println(weight);
-            System.out.println(isMale);;
-        }catch (Exception e){
-
-        }
-        session.weight = weight;
-        session.isMale = isMale;
-
-
-
 
 
     }
 
     public void onSettingsClick(View view){
         Intent intent = new Intent(this, Settings.class);
-        Bundle valuesBundle = new Bundle();
-        valuesBundle.putInt("weight", session.weight);
-        valuesBundle.putBoolean("gender", session.isMale);
-        intent.putExtras(valuesBundle);
+        intent.putExtra("object", session);
         startActivity(intent);
     }
 
