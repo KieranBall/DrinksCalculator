@@ -10,11 +10,11 @@
         android:id="@+id/bac_display"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
+        android:layout_marginEnd="16dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="32dp"
         android:text="@string/default_bac"
-        android:textSize="24sp"
+        android:textSize="42sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -87,20 +87,6 @@
         app:layout_constraintEnd_toStartOf="@+id/time_until_sober_label"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <Button
-        android:id="@+id/settings_button"
-        style="@android:style/Widget.Holo.Button"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="16dp"
-        android:text="@string/settings"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:onClick="onSettingsClick"/>
-
     <TextView
         android:id="@+id/time_until_drive_display"
         android:layout_width="wrap_content"
@@ -127,45 +113,21 @@
 
     <Button
         android:id="@+id/add_drink_button"
-        style="@android:style/Widget.Holo.Button"
+        style="@android:style/Widget.Holo.Button.Borderless"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="32dp"
         android:layout_marginEnd="16dp"
         android:layout_marginStart="16dp"
         android:onClick="onAddDrinkClick"
         android:text="@string/add_drink"
-        app:layout_constraintBottom_toTopOf="@+id/settings_button"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <Button
-        android:id="@+id/plus_button"
-        style="@android:style/Widget.Holo.Button.Small"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:onClick="onPlusClick"
-        android:text="@string/plus"
-        app:layout_constraintBottom_toBottomOf="@+id/drinkUnits"
-        app:layout_constraintEnd_toStartOf="@+id/minus_button"
-        app:layout_constraintTop_toTopOf="@+id/drinkUnits" />
-
-    <Button
-        android:id="@+id/minus_button"
-        style="@android:style/Widget.Holo.Button.Small"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:onClick="onMinusClick"
-        android:text="@string/minus"
-        app:layout_constraintBottom_toBottomOf="@+id/plus_button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/plus_button" />
-
     <EditText
         android:id="@+id/drinkUnits"
-        android:layout_width="0dp"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:layout_marginEnd="16dp"
@@ -174,22 +136,54 @@
         android:inputType="textImeMultiLine|numberDecimal"
         android:singleLine="true"
         android:text="@string/default_drink"
-        android:textAlignment="textEnd"
+        android:textAlignment="center"
         app:layout_constraintBottom_toTopOf="@+id/add_drink_button"
-        app:layout_constraintEnd_toStartOf="@+id/plus_button"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         tools:ignore="LabelFor" />
 
-    <ImageView
-        android:id="@+id/imageView"
+    <ImageButton
+        android:id="@+id/imageButton4"
+        style="@android:style/Widget.Holo.Button.Borderless.Small"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginTop="16dp"
-        android:src="@drawable/update_arrow"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="8dp"
         android:onClick="onRefreshClick"
-        />
+        android:src="@drawable/ic_refresh_white_24dp"
+        app:layout_constraintEnd_toStartOf="@+id/imageButton5"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/imageButton5"
+        style="@android:style/Widget.Holo.Button.Borderless.Small"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:onClick="onSettingsClick"
+        android:src="@drawable/ic_settings_white_24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/imageButton6"
+        style="@android:style/Widget.Holo.Light.Button.Borderless.Small"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="onPlusClick"
+        android:src="@drawable/ic_add_white_18dp"
+        app:layout_constraintBottom_toBottomOf="@+id/drinkUnits"
+        app:layout_constraintStart_toEndOf="@+id/drinkUnits"
+        app:layout_constraintTop_toTopOf="@+id/drinkUnits" />
+
+    <ImageButton
+        android:id="@+id/imageButton7"
+        style="@android:style/Widget.Holo.Button.Borderless.Small"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="onMinusClick"
+        android:src="@drawable/ic_remove_white_18dp"
+        app:layout_constraintBottom_toBottomOf="@+id/drinkUnits"
+        app:layout_constraintEnd_toStartOf="@+id/drinkUnits"
+        app:layout_constraintTop_toTopOf="@+id/drinkUnits" />
 
 </android.support.constraint.ConstraintLayout>
