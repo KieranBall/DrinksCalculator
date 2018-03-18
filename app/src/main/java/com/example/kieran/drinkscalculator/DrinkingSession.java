@@ -119,7 +119,7 @@ public class DrinkingSession {
             }
 
             int rawMinute = currentTime.get(Calendar.MINUTE);
-            String formattedMinute = "";
+            String formattedMinute = Integer.toString(rawMinute);
             if (rawMinute < 10){
                 formattedMinute = String.format("0%d", rawMinute);
             }
