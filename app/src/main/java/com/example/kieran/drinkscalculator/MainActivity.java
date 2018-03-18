@@ -96,7 +96,7 @@ public class MainActivity extends Activity {
     public void onRefreshClick(View view){
         session.calculateBac();
         TextView bacDisplay = (TextView) findViewById(R.id.bac_display);
-        String formatedBacDisplay = session.bac.substring(0, 5);
+        String formatedBacDisplay = session.bac.substring(1, 5);
         bacDisplay.setText(formatedBacDisplay);
         setEffectsText();
 

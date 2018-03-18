@@ -24,6 +24,8 @@
         android:layout_marginStart="16dp"
         android:ems="10"
         android:inputType="number"
+        android:textAppearance="@android:style/TextAppearance.DeviceDefault.Small"
+        android:textSize="18sp"
         app:layout_constraintBaseline_toBaselineOf="@+id/weight_label"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/weight_label"

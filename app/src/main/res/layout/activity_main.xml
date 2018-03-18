@@ -14,7 +14,8 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="32dp"
         android:text="@string/default_bac"
-        android:textSize="42sp"
+        android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
+        android:textSize="50dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -137,6 +138,8 @@
         android:singleLine="true"
         android:text="@string/default_drink"
         android:textAlignment="center"
+        android:textAppearance="@android:style/TextAppearance.DeviceDefault.Small"
+        android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/add_drink_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
