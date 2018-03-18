@@ -52,6 +52,22 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
+    <Button
+        android:id="@+id/save_button2"
+        style="@android:style/Widget.Holo.Button.Borderless"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="128dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:background="@color/accent_material_dark"
+        android:onClick="onResetSessionClick"
+        android:text="@string/reset_session"
+        app:layout_constraintBottom_toTopOf="@+id/save_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <SeekBar
         android:id="@+id/weight_seek"
         android:layout_width="0dp"
@@ -69,8 +85,10 @@
         android:id="@+id/weight_display"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
+        android:text="0"
         app:layout_constraintBottom_toTopOf="@+id/weight_seek"
         app:layout_constraintEnd_toEndOf="@+id/weight_seek"
         app:layout_constraintStart_toStartOf="@+id/weight_seek" />

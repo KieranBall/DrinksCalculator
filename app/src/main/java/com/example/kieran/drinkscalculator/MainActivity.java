@@ -12,18 +12,25 @@ import java.math.BigDecimal;
 import java.util.Calendar;
 
 public class MainActivity extends Activity {
-    DrinkingSession session = new DrinkingSession(75000, true);
-    public int weight = 65000;
-    public boolean isMale = true;
+    DrinkingSession session = new DrinkingSession(65000, true);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Intent intent = getIntent();
 
+        try {
+            session = (DrinkingSession) intent.getSerializableExtra("object");
+            TextView bacDisplay = (TextView) findViewById(R.id.bac_display);
+            String formatedBacDisplay = session.bac.substring(1, 5);
+            bacDisplay.setText(formatedBacDisplay);
+            setTimesText();
 
-
+        } catch (Exception e){
+            session = new DrinkingSession(65000, true);
+        }
     }
 
     public void onSettingsClick(View view){
@@ -52,8 +59,6 @@ public class MainActivity extends Activity {
         EditText plusButton = (EditText) findViewById(R.id.drinkUnits);
         String editTextString = plusButton.getText().toString();
         session.addDrink(editTextString);
-        System.out.println(session.weight);
-        System.out.println(session.isMale);
         session.calculateBac();
         TextView bacDisplay = (TextView) findViewById(R.id.bac_display);
         String formatedBacDisplay = session.bac.substring(1, 5);
@@ -77,10 +82,12 @@ public class MainActivity extends Activity {
 
 
     public void onRefreshClick(View view){
-        session.calculateBac();
-        TextView bacDisplay = (TextView) findViewById(R.id.bac_display);
-        String formatedBacDisplay = session.bac.substring(1, 5);
-        bacDisplay.setText(formatedBacDisplay);
 
+        if (Double.parseDouble(session.bac) > 0.0) {
+            session.calculateBac();
+            TextView bacDisplay = (TextView) findViewById(R.id.bac_display);
+            String formatedBacDisplay = session.bac.substring(1, 5);
+            bacDisplay.setText(formatedBacDisplay);
+        }
     }
 }

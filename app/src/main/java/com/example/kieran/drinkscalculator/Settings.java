@@ -12,18 +12,43 @@ import android.widget.TextView;
 import java.io.Serializable;
 
 public class Settings extends Activity {
-    public int weight = 65000;
-    public boolean isMale = true;
+    DrinkingSession session;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
-
         Intent intent = getIntent();
+        session = (DrinkingSession) intent.getSerializableExtra("object");
 
-        DrinkingSession testSer = (DrinkingSession) intent.getSerializableExtra("object");
-        System.out.println(testSer.bac);
+
+        final TextView weightLabel = (TextView) findViewById(R.id.weight_display);
+
+        SeekBar weightSeek = (SeekBar)findViewById(R.id.weight_seek);
+        weightSeek.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                String label = Integer.toString(progress);
+                weightLabel.setText(label);
+                session.weight = progress*1000;
+
+            }
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {}
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {}});
+
+
+        final Spinner genderSpin = (Spinner) findViewById(R.id.gender_select);
+        genderSpin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String gender = genderSpin.getSelectedItem().toString();
+                if (gender.equals("Male"))session.setMale(true);
+                else if (gender.equals("Female"))session.setMale(false);
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {}});
 
 
 
@@ -33,7 +58,12 @@ public class Settings extends Activity {
 
     public void onSaveClick(View view){
         Intent intent = new Intent(this,MainActivity.class);
+        intent.putExtra("object", session);
         startActivity(intent);
+    }
+
+    public void onResetSessionClick(View view){
+        session = new DrinkingSession(session.weight,session.isMale);
     }
 
 
