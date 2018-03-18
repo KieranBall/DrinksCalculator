@@ -99,7 +99,6 @@ public class MainActivity extends Activity {
         String formatedBacDisplay = session.bac.substring(0, 5);
         bacDisplay.setText(formatedBacDisplay);
         setEffectsText();
-        setTimesText();
 
     }
 

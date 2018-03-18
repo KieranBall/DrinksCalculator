@@ -98,7 +98,7 @@ public class DrinkingSession {
         else {
 
             Calendar currentTime = Calendar.getInstance();
-            currentTime.add(Calendar.HOUR_OF_DAY, hours);
+            currentTime.add(Calendar.HOUR_OF_DAY, hours+1);
 
             int hour24 = currentTime.get(Calendar.HOUR_OF_DAY);
             int hour12 = 0;
