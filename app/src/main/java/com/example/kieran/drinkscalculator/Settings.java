@@ -22,12 +22,21 @@ public class Settings extends Activity {
         session = (DrinkingSession) intent.getSerializableExtra("object");
 
 
-        final TextView weightLabel = (TextView) findViewById(R.id.weight_display);
-
         SeekBar weightSeek = (SeekBar)findViewById(R.id.weight_seek);
+        weightSeek.setProgress(session.weight/1000);
+        TextView weightLabel = (TextView) findViewById(R.id.weight_display);
+        weightLabel.setText(Integer.toString(session.weight/1000));
+        Spinner genderSpin = (Spinner) findViewById(R.id.gender_select);
+
+        if (session.isMale)genderSpin.setSelection(0);
+        else if (!session.isMale)genderSpin.setSelection(1);
+
+
+
         weightSeek.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                TextView weightLabel = (TextView) findViewById(R.id.weight_display);
                 String label = Integer.toString(progress);
                 weightLabel.setText(label);
                 session.weight = progress*1000;
@@ -39,10 +48,11 @@ public class Settings extends Activity {
             public void onStopTrackingTouch(SeekBar seekBar) {}});
 
 
-        final Spinner genderSpin = (Spinner) findViewById(R.id.gender_select);
+
         genderSpin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                Spinner genderSpin = (Spinner) findViewById(R.id.gender_select);
                 String gender = genderSpin.getSelectedItem().toString();
                 if (gender.equals("Male"))session.setMale(true);
                 else if (gender.equals("Female"))session.setMale(false);
