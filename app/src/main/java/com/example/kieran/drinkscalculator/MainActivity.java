@@ -31,6 +31,8 @@ public class MainActivity extends Activity {
         } catch (Exception e){
             session = new DrinkingSession(65000, true);
         }
+
+
     }
 
     public void onSettingsClick(View view){
