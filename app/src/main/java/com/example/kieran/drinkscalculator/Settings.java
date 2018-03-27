@@ -1,7 +1,9 @@
 package com.example.kieran.drinkscalculator;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
@@ -15,11 +17,20 @@ import java.io.Serializable;
 public class Settings extends Activity {
     DrinkingSession session;
     float initialX, initialY;
+    String weightKey ="com.kieran.drinkscalculator.weight";
+    String genderKey = "com.kieran.drinkscalculator.gender";
+    SharedPreferences preferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
+
+        // create shared preferences
+        preferences = this.getSharedPreferences(
+                "com.kieran.drinkscalculator", Context.MODE_PRIVATE);
+
+
         Intent intent = getIntent();
         session = (DrinkingSession) intent.getSerializableExtra("object");
 
@@ -107,5 +118,26 @@ public class Settings extends Activity {
         return super.onTouchEvent(event);
     }
 
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        preferences.edit().putInt(weightKey, session.getWeight()).apply();
+        preferences.edit().putBoolean(genderKey, session.getIsMale()).apply();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        preferences.edit().putInt(weightKey, session.getWeight()).apply();
+        preferences.edit().putBoolean(genderKey, session.getIsMale()).apply();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        preferences.edit().putInt(weightKey, session.getWeight()).apply();
+        preferences.edit().putBoolean(genderKey, session.getIsMale()).apply();
+    }
 
 }

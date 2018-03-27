@@ -10,16 +10,14 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.content.SharedPreferences;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Calendar;
 
 public class MainActivity extends Activity {
     DrinkingSession session = new DrinkingSession(65000, true);
     float initialX, initialY;
     String weightKey ="com.kieran.drinkscalculator.weight";
     String genderKey = "com.kieran.drinkscalculator.gender";
-    SharedPreferences prefrences;
+    SharedPreferences preferences;
 
 
     @Override
@@ -27,42 +25,53 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        prefrences = this.getSharedPreferences(
+
+        // Create shared preferences
+        preferences = this.getSharedPreferences(
                 "com.kieran.drinkscalculator", Context.MODE_PRIVATE);
 
 
-        Intent intent = getIntent();
+        if (savedInstanceState == null){
 
-        try {
-            session = (DrinkingSession) intent.getSerializableExtra("object");
+            // Get session from intent
+            Intent intent = getIntent();
+            try {
+                session = (DrinkingSession) intent.getSerializableExtra("object");
+                TextView bacDisplay = (TextView) findViewById(R.id.bac_display);
+                String formatedBacDisplay = session.getBac().substring(1, 5);
+                bacDisplay.setText(formatedBacDisplay);
+                setTimesText();
+            } catch (Exception e){
+                int weight = preferences.getInt(weightKey, 65000);
+                boolean isMale = preferences.getBoolean(genderKey, true);
+                session = new DrinkingSession(weight, isMale);
+
+            }
+        }
+        else {
+            session = (DrinkingSession) savedInstanceState.getSerializable("object");
             TextView bacDisplay = (TextView) findViewById(R.id.bac_display);
             String formatedBacDisplay = session.getBac().substring(1, 5);
             bacDisplay.setText(formatedBacDisplay);
             setTimesText();
-
-        } catch (Exception e){
-
-            int weight = prefrences.getInt(weightKey, 65000);
-            boolean isMale = prefrences.getBoolean(genderKey, true);
-            session = new DrinkingSession(weight, isMale);
-            System.out.println(weight);
-            System.out.println(isMale);
-
         }
-
-
 
 
 
     }
 
+
     public void onSettingsClick(View view){
+        // Starts the settings activity
+        // Used when the settings button is clicked
         Intent intent = new Intent(this, Settings.class);
         intent.putExtra("object", session);
         startActivity(intent);
     }
 
+
     public void  onPlusClick(View view){
+        // Adds .1 to the standard drinks when the plus button is clicked
         EditText plusButton = (EditText) findViewById(R.id.drinkUnits);
         String editTextString = plusButton.getText().toString();
         BigDecimal drinksNumber = new BigDecimal(editTextString);
@@ -70,7 +79,9 @@ public class MainActivity extends Activity {
         plusButton.setText(newDrinksNumber.toString());
     }
 
+
     public void  onMinusClick(View view){
+        // Subtracts .1 from the standard drinks when the plus button is clicked
         EditText plusButton = (EditText) findViewById(R.id.drinkUnits);
         String editTextString = plusButton.getText().toString();
         BigDecimal drinksNumber = new BigDecimal(editTextString);
@@ -78,7 +89,10 @@ public class MainActivity extends Activity {
         plusButton.setText(newDrinksNumber.toString());
     }
 
+
     public void onAddDrinkClick(View view){
+        // Runs the addDrink and calculateBac function from DrinkingSession
+        // Updates the labels on the layout
         EditText plusButton = (EditText) findViewById(R.id.drinkUnits);
         String editTextString = plusButton.getText().toString();
         session.addDrink(editTextString);
@@ -90,8 +104,10 @@ public class MainActivity extends Activity {
 
     }
 
-    public void setTimesText(){
 
+    public void setTimesText(){
+        // Runs the calcTimeTill function from DrinkingSession
+        // Updates the time labels on the layout
         String soberTime = session.calcTimeTill("0.0");
         TextView soberTimeDisplay = (TextView) findViewById(R.id.time_until_sober_display);
         soberTimeDisplay.setText(soberTime);
@@ -103,9 +119,8 @@ public class MainActivity extends Activity {
     }
 
 
-
     public void onRefreshClick(View view){
-
+        // Recalculates the Bac and updates the layout
         if (Double.parseDouble(session.getBac()) > 0.0) {
             session.calculateBac();
             TextView bacDisplay = (TextView) findViewById(R.id.bac_display);
@@ -113,6 +128,7 @@ public class MainActivity extends Activity {
             bacDisplay.setText(formatedBacDisplay);
         }
     }
+
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
@@ -127,26 +143,41 @@ public class MainActivity extends Activity {
             case MotionEvent.ACTION_UP:
                 float finalX = event.getX();
                 float finalY = event.getY();
-
                 if (initialX > finalX) {
-
                     Intent intent = new Intent(this, Settings.class);
                     intent.putExtra("object", session);
                     startActivity(intent);
                 }
                 break;
-
         }
-
         return super.onTouchEvent(event);
     }
+
 
     @Override
     protected void onPause() {
         super.onPause();
-        prefrences.edit().putInt(weightKey, session.getWeight()).apply();
-        prefrences.edit().putBoolean(genderKey, session.getIsMale()).apply();
+        preferences.edit().putInt(weightKey, session.getWeight()).apply();
+        preferences.edit().putBoolean(genderKey, session.getIsMale()).apply();
     }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+        preferences.edit().putInt(weightKey, session.getWeight()).apply();
+        preferences.edit().putBoolean(genderKey, session.getIsMale()).apply();
+    }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        preferences.edit().putInt(weightKey, session.getWeight()).apply();
+        preferences.edit().putBoolean(genderKey, session.getIsMale()).apply();
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putSerializable("object", session);
+    }
 }
