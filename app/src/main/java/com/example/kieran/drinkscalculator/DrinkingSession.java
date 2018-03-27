@@ -16,7 +16,7 @@ public class DrinkingSession implements Serializable {
     private Calendar timeFirstDrink;
 
 
-    public DrinkingSession(int userWeight, boolean isUserMale) {
+    DrinkingSession(int userWeight, boolean isUserMale) {
         this.weight = userWeight;
         this.isMale = isUserMale;
     }
@@ -70,11 +70,11 @@ public class DrinkingSession implements Serializable {
     public void calculateBac() {
         alcoholConsumedGrams = totalStandardDrinks.multiply(new BigDecimal("10"));
 
-        String genderConstant = "";
+        String genderConstant;
 
         if (isMale) {
             genderConstant = "0.68";
-        } else if (!isMale) {
+        } else{
             genderConstant = "0.58";
         }
 
@@ -109,7 +109,7 @@ public class DrinkingSession implements Serializable {
             controlBac = controlBac.subtract(new BigDecimal("0.015"));
 
             int result = controlBac.compareTo(new BigDecimal(percentage));
-            if (result == 0 || result == -1) {
+            if (result == 0 || result < 0) {
                 break;
 
             }
@@ -118,9 +118,7 @@ public class DrinkingSession implements Serializable {
 
         if (hours == 0) {
             double bacDouble = Double.parseDouble(bac);
-            if (bacDouble >= 0.05) {
-
-            } else {
+            if (bacDouble < 0.05) {
                 return "-";
             }
 
@@ -130,8 +128,8 @@ public class DrinkingSession implements Serializable {
         currentTime.add(Calendar.HOUR_OF_DAY, hours + 1);
 
         int hour24 = currentTime.get(Calendar.HOUR_OF_DAY);
-        int hour12 = 0;
-        String amPm = "am";
+        int hour12;
+        String amPm;
 
         if (hour24 == 0) {
             hour12 = 12;
@@ -142,7 +140,7 @@ public class DrinkingSession implements Serializable {
         } else if (hour24 == 12) {
             hour12 = 12;
             amPm = "pm";
-        } else if (hour24 > 12) {
+        } else {
             hour12 = hour24 - 12;
             amPm = "pm";
         }
@@ -150,10 +148,10 @@ public class DrinkingSession implements Serializable {
         int rawMinute = currentTime.get(Calendar.MINUTE);
         String formattedMinute = Integer.toString(rawMinute);
         if (rawMinute < 10) {
-            formattedMinute = String.format("0%d", rawMinute);
+            formattedMinute = String.format("0%s", rawMinute);
         }
 
-        return String.format("%d:%s%s", hour12, formattedMinute, amPm);
+        return String.format("%s:%s%s", hour12, formattedMinute, amPm);
 
 
     }

@@ -15,7 +15,7 @@ import java.math.BigDecimal;
 public class MainActivity extends Activity {
     DrinkingSession session = new DrinkingSession(65000, true);
     float initialX, initialY;
-    String weightKey ="com.kieran.drinkscalculator.weight";
+    String weightKey = "com.kieran.drinkscalculator.weight";
     String genderKey = "com.kieran.drinkscalculator.gender";
     SharedPreferences preferences;
 
@@ -31,37 +31,35 @@ public class MainActivity extends Activity {
                 "com.kieran.drinkscalculator", Context.MODE_PRIVATE);
 
 
-        if (savedInstanceState == null){
+        // Get DrinkingSession "session" or create new one
+        if (savedInstanceState == null) {
 
             // Get session from intent
             Intent intent = getIntent();
             try {
                 session = (DrinkingSession) intent.getSerializableExtra("object");
-                TextView bacDisplay = (TextView) findViewById(R.id.bac_display);
+                TextView bacDisplay = findViewById(R.id.bac_display);
                 String formatedBacDisplay = session.getBac().substring(1, 5);
                 bacDisplay.setText(formatedBacDisplay);
                 setTimesText();
-            } catch (Exception e){
+            } catch (Exception e) {
                 int weight = preferences.getInt(weightKey, 65000);
                 boolean isMale = preferences.getBoolean(genderKey, true);
                 session = new DrinkingSession(weight, isMale);
 
             }
-        }
-        else {
+        } else {
+            // Get session from save instance
             session = (DrinkingSession) savedInstanceState.getSerializable("object");
-            TextView bacDisplay = (TextView) findViewById(R.id.bac_display);
+            TextView bacDisplay = findViewById(R.id.bac_display);
             String formatedBacDisplay = session.getBac().substring(1, 5);
             bacDisplay.setText(formatedBacDisplay);
             setTimesText();
         }
-
-
-
     }
 
 
-    public void onSettingsClick(View view){
+    public void onSettingsClick(View view) {
         // Starts the settings activity
         // Used when the settings button is clicked
         Intent intent = new Intent(this, Settings.class);
@@ -70,34 +68,34 @@ public class MainActivity extends Activity {
     }
 
 
-    public void  onPlusClick(View view){
+    public void onPlusClick(View view) {
         // Adds .1 to the standard drinks when the plus button is clicked
-        EditText plusButton = (EditText) findViewById(R.id.drinkUnits);
+        EditText plusButton = findViewById(R.id.drinkUnits);
         String editTextString = plusButton.getText().toString();
         BigDecimal drinksNumber = new BigDecimal(editTextString);
         BigDecimal newDrinksNumber = drinksNumber.add(new BigDecimal("0.1"));
-        plusButton.setText(newDrinksNumber.toString());
+        plusButton.setText(String.format("%s", newDrinksNumber));
     }
 
 
-    public void  onMinusClick(View view){
+    public void onMinusClick(View view) {
         // Subtracts .1 from the standard drinks when the plus button is clicked
-        EditText plusButton = (EditText) findViewById(R.id.drinkUnits);
+        EditText plusButton = findViewById(R.id.drinkUnits);
         String editTextString = plusButton.getText().toString();
         BigDecimal drinksNumber = new BigDecimal(editTextString);
         BigDecimal newDrinksNumber = drinksNumber.subtract(new BigDecimal("0.1"));
-        plusButton.setText(newDrinksNumber.toString());
+        plusButton.setText(String.format("%s", newDrinksNumber));
     }
 
 
-    public void onAddDrinkClick(View view){
+    public void onAddDrinkClick(View view) {
         // Runs the addDrink and calculateBac function from DrinkingSession
         // Updates the labels on the layout
-        EditText plusButton = (EditText) findViewById(R.id.drinkUnits);
+        EditText plusButton = findViewById(R.id.drinkUnits);
         String editTextString = plusButton.getText().toString();
         session.addDrink(editTextString);
         session.calculateBac();
-        TextView bacDisplay = (TextView) findViewById(R.id.bac_display);
+        TextView bacDisplay = findViewById(R.id.bac_display);
         String formatedBacDisplay = session.getBac().substring(1, 5);
         bacDisplay.setText(formatedBacDisplay);
         setTimesText();
@@ -105,25 +103,25 @@ public class MainActivity extends Activity {
     }
 
 
-    public void setTimesText(){
+    public void setTimesText() {
         // Runs the calcTimeTill function from DrinkingSession
         // Updates the time labels on the layout
         String soberTime = session.calcTimeTill("0.0");
-        TextView soberTimeDisplay = (TextView) findViewById(R.id.time_until_sober_display);
+        TextView soberTimeDisplay = findViewById(R.id.time_until_sober_display);
         soberTimeDisplay.setText(soberTime);
 
         String driveTime = session.calcTimeTill("0.05");
-        TextView driveTimeDisplay = (TextView) findViewById(R.id.time_until_drive_display);
+        TextView driveTimeDisplay = findViewById(R.id.time_until_drive_display);
         driveTimeDisplay.setText(driveTime);
 
     }
 
 
-    public void onRefreshClick(View view){
+    public void onRefreshClick(View view) {
         // Recalculates the Bac and updates the layout
         if (Double.parseDouble(session.getBac()) > 0.0) {
             session.calculateBac();
-            TextView bacDisplay = (TextView) findViewById(R.id.bac_display);
+            TextView bacDisplay = findViewById(R.id.bac_display);
             String formatedBacDisplay = session.getBac().substring(1, 5);
             bacDisplay.setText(formatedBacDisplay);
         }
@@ -142,7 +140,6 @@ public class MainActivity extends Activity {
 
             case MotionEvent.ACTION_UP:
                 float finalX = event.getX();
-                float finalY = event.getY();
                 if (initialX > finalX) {
                     Intent intent = new Intent(this, Settings.class);
                     intent.putExtra("object", session);
