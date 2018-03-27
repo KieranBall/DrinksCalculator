@@ -79,7 +79,8 @@
         android:min="45"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/weight_label"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:targetApi="o" />
 
     <TextView
         android:id="@+id/weight_display"
@@ -88,7 +89,6 @@
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:text="0"
         app:layout_constraintBottom_toTopOf="@+id/weight_seek"
         app:layout_constraintEnd_toEndOf="@+id/weight_seek"
         app:layout_constraintStart_toStartOf="@+id/weight_seek" />

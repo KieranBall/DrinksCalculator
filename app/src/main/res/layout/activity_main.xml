@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/main"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -11,17 +10,18 @@
         android:id="@+id/bac_display"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="64dp"
         android:layout_marginEnd="16dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:text="@string/default_bac"
         android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
-        android:textSize="100dp"
-        app:layout_constraintBottom_toTopOf="@+id/time_until_drive_label"
+        android:textSize="100sp"
+        app:layout_constraintBottom_toTopOf="@+id/drinkUnits"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.32999998" />
 
     <TextView
         android:id="@+id/bac_label"
@@ -35,34 +35,51 @@
         app:layout_constraintTop_toBottomOf="@+id/bac_display" />
 
     <TextView
+        android:id="@+id/standard_drinks"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:text="@string/standard_drinks"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toTopOf="@+id/drinkUnits"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
         android:id="@+id/time_until_sober_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="128dp"
+        android:layout_marginBottom="8dp"
         android:layout_marginEnd="32dp"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
         android:text="@string/zero_bac_heading"
         android:textAlignment="center"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/drinkUnits"
+        app:layout_constraintBottom_toTopOf="@+id/imageButton6"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/time_until_drive_label" />
+        app:layout_constraintStart_toEndOf="@+id/time_until_drive_label"
+        app:layout_constraintTop_toBottomOf="@+id/bac_label" />
 
     <TextView
         android:id="@+id/time_until_drive_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="128dp"
+        android:layout_marginBottom="8dp"
         android:layout_marginEnd="102dp"
         android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
         android:text="@string/drive_heading"
         android:textAlignment="center"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/drinkUnits"
+        app:layout_constraintBottom_toTopOf="@+id/imageButton7"
         app:layout_constraintEnd_toStartOf="@+id/time_until_sober_label"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bac_label" />
 
     <TextView
         android:id="@+id/time_until_drive_display"
@@ -133,7 +150,8 @@
         android:onClick="onRefreshClick"
         android:src="@drawable/ic_refresh_white_24dp"
         app:layout_constraintEnd_toStartOf="@+id/imageButton5"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="@string/blank_description" />
 
     <ImageButton
         android:id="@+id/imageButton5"
@@ -144,7 +162,8 @@
         android:onClick="onSettingsClick"
         android:src="@drawable/ic_settings_white_24dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="@string/blank_description" />
 
     <ImageButton
         android:id="@+id/imageButton6"
@@ -155,7 +174,8 @@
         android:src="@drawable/ic_add_white_18dp"
         app:layout_constraintBottom_toBottomOf="@+id/drinkUnits"
         app:layout_constraintStart_toEndOf="@+id/drinkUnits"
-        app:layout_constraintTop_toTopOf="@+id/drinkUnits" />
+        app:layout_constraintTop_toTopOf="@+id/drinkUnits"
+        android:contentDescription="@string/blank_description" />
 
     <ImageButton
         android:id="@+id/imageButton7"
@@ -166,6 +186,7 @@
         android:src="@drawable/ic_remove_white_18dp"
         app:layout_constraintBottom_toBottomOf="@+id/drinkUnits"
         app:layout_constraintEnd_toStartOf="@+id/drinkUnits"
-        app:layout_constraintTop_toTopOf="@+id/drinkUnits" />
+        app:layout_constraintTop_toTopOf="@+id/drinkUnits"
+        android:contentDescription="@string/blank_description" />
 
 </android.support.constraint.ConstraintLayout>

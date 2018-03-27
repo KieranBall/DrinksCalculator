@@ -3,10 +3,7 @@ package com.example.kieran.drinkscalculator;
 import org.junit.Test;
 
 import java.math.BigDecimal;
-import java.util.Calendar;
-
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 
@@ -14,14 +11,14 @@ public class DrinkingSessionUnitTest {
 
 
     @Test
-    public void checkWeight() throws Exception {
+    public void checkWeight() {
         DrinkingSession session1 = new DrinkingSession(45000,true);
         session1.setWeight(55000);
         assertEquals(55000,session1.getWeight());
     }
 
     @Test
-    public void checkGender() throws Exception {
+    public void checkGender() {
         DrinkingSession session1 = new DrinkingSession(45000,true);
         session1.setMale(false);
         assertEquals(false, session1.getIsMale());
@@ -30,14 +27,14 @@ public class DrinkingSessionUnitTest {
     }
 
     @Test
-    public void checkDrink() throws Exception {
+    public void checkDrink() {
         DrinkingSession session1 = new DrinkingSession(45000,true);
         session1.addDrink("1.0");
         assertEquals(1,session1.getNumDrinks());
     }
 
     @Test
-    public void checkBac() throws Exception {
+    public void checkBac(){
         DrinkingSession session1 = new DrinkingSession(95000,true);
         DrinkingSession session2 = new DrinkingSession(45000,false);
         DrinkingSession session3 = new DrinkingSession(95000,false);
@@ -106,12 +103,6 @@ public class DrinkingSessionUnitTest {
         session1.addDrink("0.8");
         session1.calculateBac();
 
-
-        System.out.println(session1.getBac());
-        System.out.println(session1.getAlcoholConsumedGrams());
-        System.out.println(session1.getNumDrinks());
-        System.out.println(session1.getTotalStandardDrinks());
-
         assertEquals("0.145", session1.getBac());
         assertEquals(new BigDecimal("64.0"), session1.getAlcoholConsumedGrams());
         assertEquals(5, session1.getNumDrinks());
@@ -129,11 +120,6 @@ public class DrinkingSessionUnitTest {
         session1.addDrink("2.3");
         session1.calculateBac();
 
-
-        System.out.println(session1.getBac());
-        System.out.println(session1.getAlcoholConsumedGrams());
-        System.out.println(session1.getNumDrinks());
-        System.out.println(session1.getTotalStandardDrinks());
 
         assertEquals("0.152", session1.getBac());
         assertEquals(new BigDecimal("67.0"), session1.getAlcoholConsumedGrams());
@@ -164,12 +150,6 @@ public class DrinkingSessionUnitTest {
         session1.addDrink("1.8");
         session1.calculateBac();
 
-
-
-        System.out.println(session1.getBac());
-        System.out.println(session1.getAlcoholConsumedGrams());
-        System.out.println(session1.getNumDrinks());
-        System.out.println(session1.getTotalStandardDrinks());
 
         assertEquals("0.373", session1.getBac());
         assertEquals(new BigDecimal("165.0"), session1.getAlcoholConsumedGrams());
