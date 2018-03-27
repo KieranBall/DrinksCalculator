@@ -1,12 +1,14 @@
 package com.example.kieran.drinkscalculator;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.content.SharedPreferences;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -15,12 +17,19 @@ import java.util.Calendar;
 public class MainActivity extends Activity {
     DrinkingSession session = new DrinkingSession(65000, true);
     float initialX, initialY;
+    String weightKey ="com.kieran.drinkscalculator.weight";
+    String genderKey = "com.kieran.drinkscalculator.gender";
+    SharedPreferences prefrences;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        prefrences = this.getSharedPreferences(
+                "com.kieran.drinkscalculator", Context.MODE_PRIVATE);
+
 
         Intent intent = getIntent();
 
@@ -30,12 +39,18 @@ public class MainActivity extends Activity {
             String formatedBacDisplay = session.bac.substring(1, 5);
             bacDisplay.setText(formatedBacDisplay);
             setTimesText();
-            System.out.println("Try");
 
         } catch (Exception e){
-            session = new DrinkingSession(65000, true);
-            System.out.println("Catch");
+
+            int weight = prefrences.getInt(weightKey, 65000);
+            boolean isMale = prefrences.getBoolean(genderKey, true);
+            session = new DrinkingSession(weight, isMale);
+            System.out.println(weight);
+            System.out.println(isMale);
+
         }
+
+
 
 
 
@@ -109,38 +124,28 @@ public class MainActivity extends Activity {
                 initialY = event.getY();
                 break;
 
-            case MotionEvent.ACTION_MOVE:
-                break;
-
             case MotionEvent.ACTION_UP:
                 float finalX = event.getX();
                 float finalY = event.getY();
 
-
-                if (initialX < finalX) {
-                    System.out.println("Left to Right swipe performed");
-                }
-
                 if (initialX > finalX) {
-                    System.out.println("Right to Left swipe performed");
+
                     Intent intent = new Intent(this, Settings.class);
                     intent.putExtra("object", session);
                     startActivity(intent);
                 }
-
-                break;
-
-            case MotionEvent.ACTION_CANCEL:
-                System.out.println("Action was CANCEL");
-                break;
-
-            case MotionEvent.ACTION_OUTSIDE:
-                System.out.println("Movement occurred outside bounds of current screen element");
                 break;
 
         }
 
-
         return super.onTouchEvent(event);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        System.out.println("destory");
+        prefrences.edit().putInt(weightKey, session.weight).apply();
+        prefrences.edit().putBoolean(genderKey, session.isMale).apply();
     }
 }
