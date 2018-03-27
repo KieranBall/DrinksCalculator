@@ -32,7 +32,6 @@
         android:layout_marginEnd="16dp"
         android:layout_marginStart="16dp"
         android:entries="@array/gender"
-        android:spinnerMode="dialog"
         app:layout_constraintBaseline_toBaselineOf="@+id/gender_label"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/gender_label" />
@@ -42,7 +41,7 @@
         style="@android:style/Widget.Holo.Button.Borderless"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="32dp"
         android:layout_marginEnd="16dp"
         android:layout_marginStart="16dp"
         android:background="@color/accent_material_dark"
@@ -50,22 +49,21 @@
         android:text="@string/save"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toEndOf="@+id/save_button2" />
 
     <Button
         android:id="@+id/save_button2"
         style="@android:style/Widget.Holo.Button.Borderless"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="128dp"
+        android:layout_marginBottom="32dp"
         android:layout_marginEnd="16dp"
         android:layout_marginStart="16dp"
         android:background="@color/accent_material_dark"
         android:onClick="onResetSessionClick"
         android:text="@string/reset_session"
-        app:layout_constraintBottom_toTopOf="@+id/save_button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/save_button"
         app:layout_constraintStart_toStartOf="parent" />
 
     <SeekBar

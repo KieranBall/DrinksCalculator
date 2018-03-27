@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">DrinksCalculator</string>
     <string name="default_bac">.000</string>
-    <string name="bac">BAC</string>
+    <string name="bac">Blood Alcohol Content</string>
     <string name="effects">Possible Effects</string>
     <string name="drive_heading">Dont Drive Until</string>
     <string name="zero_bac_heading">Time Until Sober</string>

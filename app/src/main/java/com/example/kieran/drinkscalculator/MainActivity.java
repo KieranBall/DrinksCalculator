@@ -70,35 +70,45 @@ public class MainActivity extends Activity {
 
     public void onPlusClick(View view) {
         // Adds .1 to the standard drinks when the plus button is clicked
-        EditText plusButton = findViewById(R.id.drinkUnits);
-        String editTextString = plusButton.getText().toString();
-        BigDecimal drinksNumber = new BigDecimal(editTextString);
-        BigDecimal newDrinksNumber = drinksNumber.add(new BigDecimal("0.1"));
-        plusButton.setText(String.format("%s", newDrinksNumber));
+        EditText editText = findViewById(R.id.drinkUnits);
+        String editTextString = editText.getText().toString();
+        if (Double.parseDouble(editTextString) < 5.0){
+            BigDecimal drinksNumber = new BigDecimal(editTextString);
+            BigDecimal newDrinksNumber = drinksNumber.add(new BigDecimal("0.1"));
+            editText.setText(String.format("%s", newDrinksNumber));
+        }
     }
 
 
     public void onMinusClick(View view) {
         // Subtracts .1 from the standard drinks when the plus button is clicked
-        EditText plusButton = findViewById(R.id.drinkUnits);
-        String editTextString = plusButton.getText().toString();
-        BigDecimal drinksNumber = new BigDecimal(editTextString);
-        BigDecimal newDrinksNumber = drinksNumber.subtract(new BigDecimal("0.1"));
-        plusButton.setText(String.format("%s", newDrinksNumber));
+        EditText editText = findViewById(R.id.drinkUnits);
+        String editTextString = editText.getText().toString();
+        if (Double.parseDouble(editTextString) > 0.1) {
+            BigDecimal drinksNumber = new BigDecimal(editTextString);
+            BigDecimal newDrinksNumber = drinksNumber.subtract(new BigDecimal("0.1"));
+            editText.setText(String.format("%s", newDrinksNumber));
+        }
     }
 
 
     public void onAddDrinkClick(View view) {
         // Runs the addDrink and calculateBac function from DrinkingSession
         // Updates the labels on the layout
-        EditText plusButton = findViewById(R.id.drinkUnits);
-        String editTextString = plusButton.getText().toString();
-        session.addDrink(editTextString);
-        session.calculateBac();
-        TextView bacDisplay = findViewById(R.id.bac_display);
-        String formatedBacDisplay = session.getBac().substring(1, 5);
-        bacDisplay.setText(formatedBacDisplay);
-        setTimesText();
+        EditText editText = findViewById(R.id.drinkUnits);
+        String editTextString = editText.getText().toString();
+        if (Double.parseDouble(editTextString) >= 0.1 && Double.parseDouble(editTextString) <= 5.0) {
+            session.addDrink(editTextString);
+            session.calculateBac();
+            TextView bacDisplay = findViewById(R.id.bac_display);
+            String formatedBacDisplay = session.getBac().substring(1, 5);
+            bacDisplay.setText(formatedBacDisplay);
+            setTimesText();
+        }else {
+            editText.setText("1.0");
+        }
+
+
 
     }
 
