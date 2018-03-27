@@ -27,9 +27,11 @@ public class MainActivity extends Activity {
             String formatedBacDisplay = session.bac.substring(1, 5);
             bacDisplay.setText(formatedBacDisplay);
             setTimesText();
+            System.out.println("Try");
 
         } catch (Exception e){
             session = new DrinkingSession(65000, true);
+            System.out.println("Catch");
         }
 
 

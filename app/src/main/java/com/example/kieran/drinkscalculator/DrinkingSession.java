@@ -13,7 +13,7 @@ import javax.xml.datatype.Duration;
 public class DrinkingSession implements Serializable {
     public int weight = 65000;
     public boolean isMale = false;
-    public String bac = "0.0";
+    public String bac = "0.000";
     public BigDecimal totalStandardDrinks = new BigDecimal("0.0");
     public int numDrinks = 0;
     public BigDecimal alcoholConsumedGrams;
