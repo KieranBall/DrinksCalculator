@@ -36,7 +36,7 @@ public class MainActivity extends Activity {
         try {
             session = (DrinkingSession) intent.getSerializableExtra("object");
             TextView bacDisplay = (TextView) findViewById(R.id.bac_display);
-            String formatedBacDisplay = session.bac.substring(1, 5);
+            String formatedBacDisplay = session.getBac().substring(1, 5);
             bacDisplay.setText(formatedBacDisplay);
             setTimesText();
 
@@ -84,7 +84,7 @@ public class MainActivity extends Activity {
         session.addDrink(editTextString);
         session.calculateBac();
         TextView bacDisplay = (TextView) findViewById(R.id.bac_display);
-        String formatedBacDisplay = session.bac.substring(1, 5);
+        String formatedBacDisplay = session.getBac().substring(1, 5);
         bacDisplay.setText(formatedBacDisplay);
         setTimesText();
 
@@ -106,10 +106,10 @@ public class MainActivity extends Activity {
 
     public void onRefreshClick(View view){
 
-        if (Double.parseDouble(session.bac) > 0.0) {
+        if (Double.parseDouble(session.getBac()) > 0.0) {
             session.calculateBac();
             TextView bacDisplay = (TextView) findViewById(R.id.bac_display);
-            String formatedBacDisplay = session.bac.substring(1, 5);
+            String formatedBacDisplay = session.getBac().substring(1, 5);
             bacDisplay.setText(formatedBacDisplay);
         }
     }
@@ -144,8 +144,9 @@ public class MainActivity extends Activity {
     @Override
     protected void onPause() {
         super.onPause();
-        System.out.println("destory");
-        prefrences.edit().putInt(weightKey, session.weight).apply();
-        prefrences.edit().putBoolean(genderKey, session.isMale).apply();
+        prefrences.edit().putInt(weightKey, session.getWeight()).apply();
+        prefrences.edit().putBoolean(genderKey, session.getIsMale()).apply();
     }
+
+
 }

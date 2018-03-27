@@ -25,13 +25,13 @@ public class Settings extends Activity {
 
 
         SeekBar weightSeek = (SeekBar)findViewById(R.id.weight_seek);
-        weightSeek.setProgress(session.weight/1000);
+        weightSeek.setProgress(session.getWeight()/1000);
         TextView weightLabel = (TextView) findViewById(R.id.weight_display);
-        weightLabel.setText(Integer.toString(session.weight/1000));
+        weightLabel.setText(Integer.toString(session.getWeight()/1000));
         Spinner genderSpin = (Spinner) findViewById(R.id.gender_select);
 
-        if (session.isMale)genderSpin.setSelection(0);
-        else if (!session.isMale)genderSpin.setSelection(1);
+        if (session.getIsMale())genderSpin.setSelection(0);
+        else if (!session.getIsMale())genderSpin.setSelection(1);
 
 
 
@@ -41,7 +41,7 @@ public class Settings extends Activity {
                 TextView weightLabel = (TextView) findViewById(R.id.weight_display);
                 String label = Integer.toString(progress);
                 weightLabel.setText(label);
-                session.weight = progress*1000;
+                session.setWeight(progress*1000);
 
             }
             @Override
@@ -75,8 +75,8 @@ public class Settings extends Activity {
     }
 
     public void onResetSessionClick(View view){
-        int saveWeight = session.weight;
-        boolean saveIsMale = session.isMale;
+        int saveWeight = session.getWeight();
+        boolean saveIsMale = session.getIsMale();
 
         session = new DrinkingSession(saveWeight,saveIsMale);
     }

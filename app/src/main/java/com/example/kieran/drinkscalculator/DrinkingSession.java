@@ -7,13 +7,13 @@ import java.math.RoundingMode;
 import java.util.Calendar;
 
 public class DrinkingSession implements Serializable {
-    public int weight;
-    public boolean isMale;
-    public String bac = "0.000";
-    public BigDecimal totalStandardDrinks = new BigDecimal("0.0");
-    public int numDrinks = 0;
-    public BigDecimal alcoholConsumedGrams;
-    public Calendar timeFirstDrink;
+    private int weight;
+    private boolean isMale;
+    private String bac = "0.000";
+    private BigDecimal totalStandardDrinks = new BigDecimal("0.0");
+    private int numDrinks = 0;
+    private BigDecimal alcoholConsumedGrams;
+    private Calendar timeFirstDrink;
 
 
     public DrinkingSession(int userWeight, boolean isUserMale) {
@@ -27,6 +27,35 @@ public class DrinkingSession implements Serializable {
 
     public void setMale(boolean male) {
         isMale = male;
+    }
+
+    public BigDecimal getAlcoholConsumedGrams() {
+        return alcoholConsumedGrams;
+    }
+
+    public BigDecimal getTotalStandardDrinks() {
+        return totalStandardDrinks;
+    }
+
+
+    public int getNumDrinks() {
+        return numDrinks;
+    }
+
+    public int getWeight() {
+        return weight;
+    }
+
+    public String getBac() {
+        return bac;
+    }
+
+    public boolean getIsMale(){
+        return isMale;
+    }
+
+    public Calendar getTimeFirstDrink() {
+        return timeFirstDrink;
     }
 
     public void addDrink(String standardDrink) {
